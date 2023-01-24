@@ -2,7 +2,7 @@ import http.server
 import socketserver
 from urllib.parse import parse_qs, urlparse
 
-from main import getroom
+from main import *
 
 PORT = 8000
 
@@ -12,14 +12,22 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         query = urlparse(self.path)
 
         if query.path == "/endpoint":
-            type = parse_qs(query.query)["type"][0]
+            query = parse_qs(query.query)
 
-            if type == "getroom":
-                data = getroom()
+            if query["type"][0] == "getroom":
+                data = getroom(query["room[]"], query["src[]"], [query["mic[0][]"], query["mic[1][]"]])
                 self.send_response(200)
                 self.send_header("Content-length", len(data))
                 self.end_headers()
                 self.wfile.write(bytes(data, encoding='utf8'))
+
+            elif query["type"][0] == "run_model":
+                data = runModel(query["model"][0])
+                self.send_response(200)
+                self.send_header("Content-length", len(data))
+                self.end_headers()
+                self.wfile.write(bytes(data, encoding='utf8'))
+
             else:
                 print('Invalid request.') 
 

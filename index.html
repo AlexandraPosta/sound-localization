@@ -7,25 +7,44 @@
     <link rel="shortcut icon" href="#" />
   </head>
 
-  <body style="margin: 0">
-    <div id="settings" style="background-color: gray; width: 25%; min-height: 100%; float:left; position: fixed; padding: 20px">
-      <h1>Select environment</h1>
-      <h3> Specify room size (meters) </h3>
-      <input id="room_lenght" type="number" placeholder="room lenght" size="5px">
-      <input id="room_width"  type="number" placeholder="room width" size="5px">
+  <body>
+    <div id="settings" class="split left">
+      <div id="environment_settings">
+        <h2>Select environment</h2>
+        <h4> Specify room size (meters) </h4>
+        <input id="room_l" value="5" type="number" placeholder="room lenght">
+        <input id="room_w" value="5" type="number" placeholder="room width">
+        
+        <h4> Specify sound source location </h4>
+        <input id="source_x" value="4" type="number" placeholder="x">
+        <input id="source_y" value="4" type="number" placeholder="y">
+
+        <h4> Specify microphones location </h4>
+        <input id="mic_1_x" value="2.45" type="number" placeholder="x-mic-1">
+        <input id="mic_1_y" value="2.45" type="number" placeholder="y-mic-1">
+        <input id="mic_2_x" value="2.55" type="number" placeholder="x-mic-2">
+        <input id="mic_2_y" value="2.55" type="number" placeholder="y-mic-2">
+        
+        <div>
+          <h4> Apply changes: </h4>
+          <button id='room_apply'> Apply </button>
+        </div> 
+      </div> 
       
-      <h3> Specify sound source location </h3>
-      <input id="source_x" type="number" placeholder="x" size="5px">
-      <input id="source_y" type="number" placeholder="y" size="5px">
+      <div></div>
 
-      <h3> Specify microphones location </h3>
-      <input id="mic_x" type="number" placeholder="x" size="5px">
-      <input id="mic_y" type="number" placeholder="y" size="5px">
+      <div id="model_settings">
+        <h2>Model Selection</h2>
+        <h4> Select a model to run </h4>
+        <select  id="model_type">
+            <option value="MUSIC">MUSIC</option>
+            <option value="TOPS">TOPS</option>
+        </select >
 
-      <button id='roomButton'>Apply</button>
+        <button id="run_model"> Run model </button>
     </div>
 
-    <div id="results" style="background-color: white; width: 75%; min-height: 100%; float:right">
+    <div id="results" class="split right">
 
     </div>
   </body>
