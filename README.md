@@ -20,7 +20,29 @@ TODO
 
 # Structure
 The repository is structured as follows:
-TODO
+
+Project
+└───README.md 
+|
+└───__init__.py 
+|
+└───main.py 
+|
+└───index.html
+|
+└───frontend
+|
+└───notebooks
+|
+└───data
+    └───training
+    └───testing
+
+Here is a quick explanation of the structure:
+
+- notebooks - contains all Jupyter Notebooks that were developed
+- frontend - contains the GUI for the web interface
+- data - stores preprocessed data
 
 
 # Usage
