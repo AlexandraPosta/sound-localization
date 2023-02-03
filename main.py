@@ -44,7 +44,7 @@ def getroom(room, sound, mic):
     fig, ax = aroom.plot()
     ax.set_xlim([0, float(room[0])])
     ax.set_ylim([0, float(room[1])])
-    #ax.set_zlim([0, 4])
+    #ax.set_zlim([0, 4]) used for 3D
 
     html = encode(fig)
     return html

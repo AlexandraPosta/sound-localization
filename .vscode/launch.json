@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "sound-localisation",
+            "name": "sound-localisation-comparison",
             "type": "python",
             "request": "launch",
             "stopOnEntry": false,

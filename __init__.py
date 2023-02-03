@@ -14,6 +14,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         if query.path == "/endpoint":
             query = parse_qs(query.query)
 
+            # Generate the room 
             if query["type"][0] == "getroom":
                 data = getroom(query["room[]"], query["src[]"], [query["mic[0][]"], query["mic[1][]"]])
                 self.send_response(200)
@@ -21,6 +22,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(bytes(data, encoding='utf8'))
 
+            # Run localization prediction using the specified method
             elif query["type"][0] == "run_model":
                 data = runModel(query["model"][0])
                 self.send_response(200)
