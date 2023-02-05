@@ -21,29 +21,20 @@ TODO
 # Structure
 The repository is structured as follows:
 
+```
 Project
-└───README.md 
+├──README.md 
 |
-└───__init__.py 
+├──frontend             # contains the GUI for the web interface
 |
-└───main.py 
+├──notebooks            # contains all Jupyter Notebooks that were developed
 |
-└───index.html
+├──data                 # stores preprocessed data as .wav files
+|   └───training
+|    └───testing
 |
-└───frontend
-|
-└───notebooks
-|
-└───data
-    └───training
-    └───testing
-
-Here is a quick explanation of the structure:
-
-- notebooks - contains all Jupyter Notebooks that were developed
-- frontend - contains the GUI for the web interface
-- data - stores preprocessed data
-
+└──training_data        # contains .csv files used for the cnn
+```
 
 # Usage
 To use this repository, you will need to have Git and a Python environment set up on your computer.
