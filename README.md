@@ -25,15 +25,15 @@ The repository is structured as follows:
 Project
 ├──README.md 
 |
-├──frontend             # contains the GUI for the web interface
+├──frontend         # contains the GUI for the web interface
 |
-├──notebooks            # contains all Jupyter Notebooks that were developed
+├──notebooks        # contains all Jupyter Notebooks that were developed
 |
-├──data                 # stores preprocessed data as .wav files
+├──data             # stores preprocessed data as .wav files
 |   └───training
-|    └───testing
+|   └───testing
 |
-└──training_data        # contains .csv files used for the cnn
+└──training_data    # contains .csv files used for the cnn
 ```
 
 # Usage
