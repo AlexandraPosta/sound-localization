@@ -17,23 +17,27 @@ height = 10.
 true_col = [0, 0, 0]
 distance = 2.5 # meters
 
-def getroom(room, sound, mic):
+def getroom(room, sound, sound_loc, mic):
     # Generate room
     global aroom
     snr_db = 5.    # signal-to-noise ratio
     sigma2 = 10**(-snr_db / 10) / (4. * np.pi * distance)**2
-    room_dim = np.r_[float(room[0]), float(room[1])]
-    aroom = pra.ShoeBox(room_dim, fs=fs, max_order=0, sigma2_awgn=sigma2)
+    room_dim = np.r_[float(room[0]), float(room[1]), 2.]
+    #aroom = pra.ShoeBox(room_dim, fs=fs, max_order=0, sigma2_awgn=sigma2)
+
+    fs, signal = wavfile.read(sound)
+    aroom = pra.ShoeBox(room_dim, fs=fs, max_order=0)
+    aroom.add_source([float(sound_loc[0]), float(sound_loc[1]), 1.], signal=signal)
 
     # Add sound source to room
-    rng = np.random.RandomState(23)
-    duration_samples = int(fs)
-    source_signal = rng.randn(duration_samples)
-    aroom.add_source([float(sound[0]), float(sound[1])], signal=source_signal)
+    #rng = np.random.RandomState(23)
+    #duration_samples = int(fs)
+    #source_signal = rng.randn(duration_samples)
+    #aroom.add_source([float(sound[0]), float(sound[1]), 1.], signal=source_signal)
 
     # Add microphone
     global microphones
-    microphones = np.c_[[float(mic[0][0]), float(mic[0][1])], [float(mic[1][0]), float(mic[1][1])]]
+    microphones = np.c_[[float(mic[0][0]), float(mic[0][1]), 1.], [float(mic[1][0]), float(mic[1][1]), 1.]]
     aroom.add_microphone_array(microphones)
 
     # Run the simulation
@@ -44,7 +48,7 @@ def getroom(room, sound, mic):
     fig, ax = aroom.plot()
     ax.set_xlim([0, float(room[0])])
     ax.set_ylim([0, float(room[1])])
-    #ax.set_zlim([0, 4]) used for 3D
+    ax.set_zlim([0, 2.]) 
 
     html = encode(fig)
     return html

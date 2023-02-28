@@ -1,4 +1,4 @@
-/data/training
+/data/
 /training_data/azimuth_test_dataset.csv
 /training_data/azimuth_train_dataset.csv
 /models/history.npy
