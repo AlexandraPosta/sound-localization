@@ -3,7 +3,7 @@ Welcome to the git repository for my third-year dissertation. This repository co
 
 
 # Summary
-The aim of this tool is to allow for a simpler comparison between mathematical and machine learning models of identifying the location of a sound. 
+The aim of this tool is to allow for a simpler comparison between analytical and machine learning models of identifying the location of a sound in an indoor environment.  
 
 
 ## Features
@@ -25,15 +25,17 @@ The repository is structured as follows:
 Project
 ├──README.md 
 |
-├──frontend         # contains the GUI for the web interface
+├──frontend             # contains the GUI for the web interface
 |
-├──notebooks        # contains all Jupyter Notebooks that were developed
+├──models               # contains history from the cnn training
 |
-├──data             # stores preprocessed data as .wav files
-|   └───training
-|   └───testing
+├──notebooks            # contains all Jupyter Notebooks that were developed
 |
-└──training_data    # contains .csv files used for the cnn
+├──data                 # stores preprocessed data as .wav files
+|   └───full_circle     # 360 degrees
+|   └───half_circle     # 180 degrees
+|
+└──training_data        # contains .csv files used for the cnn
 ```
 
 # Usage
@@ -47,13 +49,18 @@ TODO
 
 
 # Libraries
-TODO
+Install the following python packages:
+- scipy
+- pyroomacoustics
+- sklearn
+- keras
+- tensorflow
+
 ## Build with
 
 
 # License
 The development of the environment is currently based on pyroomacoustics.
-TODO
 
 
 # Contributions
