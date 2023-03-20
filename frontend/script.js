@@ -52,25 +52,4 @@ $(document).ready(function() {
             }
         });
     });
-
-    $('#run_model').click(function( e ) {
-        model = $('#model_type').val()
-        
-        $.ajax({ 
-            url: 'http://localhost:8000/endpoint?',
-            type: 'GET',
-            data: { 
-                'type': 'run_model',
-                'model': model
-            },
-            error: function(errorThrown){
-                console.log(errorThrown);
-            },
-            success: function(response){
-                if (response) {
-                    $('#results').prepend(response);
-                }
-            }
-        });
-    });
 });

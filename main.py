@@ -1,13 +1,17 @@
 import pyroomacoustics as pra
 import numpy as np
+
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt, patches
+
 from scipy.io import wavfile
 import base64
 from io import BytesIO
 
 aroom = None
 microphones = None
+sound_source_loc = None
 fs = 16000
 c = 343 # speed of sound
 nfft = 256  # FFT size
@@ -16,24 +20,23 @@ base = 1.
 height = 10.
 true_col = [0, 0, 0]
 distance = 2.5 # meters
+sound_files = "C:\\Users\\Alex\\source\\repos\\Data\\Sound\\arctic_a0015.wav"
 
-def getroom(room, sound, sound_loc, mic):
+
+def add_microphone_room(mic_loc):
+    aroom.add_microphone_array(mic_loc)
+
+
+def getroom(room, sound_loc, mic):
     # Generate room
     global aroom
-    snr_db = 5.    # signal-to-noise ratio
-    sigma2 = 10**(-snr_db / 10) / (4. * np.pi * distance)**2
     room_dim = np.r_[float(room[0]), float(room[1]), 2.]
-    #aroom = pra.ShoeBox(room_dim, fs=fs, max_order=0, sigma2_awgn=sigma2)
-
-    fs, signal = wavfile.read(sound)
+    fs, signal = wavfile.read(sound_files)
     aroom = pra.ShoeBox(room_dim, fs=fs, max_order=0)
     aroom.add_source([float(sound_loc[0]), float(sound_loc[1]), 1.], signal=signal)
 
-    # Add sound source to room
-    #rng = np.random.RandomState(23)
-    #duration_samples = int(fs)
-    #source_signal = rng.randn(duration_samples)
-    #aroom.add_source([float(sound[0]), float(sound[1]), 1.], signal=source_signal)
+    global sound_source_loc
+    sound_source_loc = sound_loc
 
     # Add microphone
     global microphones
@@ -81,6 +84,60 @@ def runModel(model):
     ax.set_yticks(np.linspace(0, 0, 0))
     ax.xaxis.grid(visible=True, color=[0.3, 0.3, 0.3], linestyle=':')
     ax.set_ylim([0, 1.05*(base + height)])
+
+    html = encode(fig)
+    return html
+
+
+def pathFinder(room_dim=np.r_[float(5), float(5), 2.], sound_loc=[4, 4]):
+    plt.rcParams["figure.figsize"] = [8, 8]
+    plt.rcParams["figure.autolayout"] = True
+    fig, _ = plt.subplots()
+    ax = plt.gca()
+
+    sound = patches.Circle((4, 4), radius=0.05, edgecolor='green', facecolor='none', linewidth=2)
+    ax.add_patch(patches.Rectangle((.1, .1), 5, 5, edgecolor='black', facecolor='none', linewidth=2))
+    ax.add_patch(sound)
+
+    centre_mic = [(microphones[0][0]-microphones[1][0])/2, (microphones[0][1]-microphones[1][1])/2]
+    found = False
+
+    while found:
+        # Generate room
+        fs, signal = wavfile.read(sound_files)
+        room = pra.ShoeBox(room_dim, fs=fs, max_order=0)
+        room.add_source([float(sound_loc[0]), float(sound_loc[1]), 1.], signal=signal)
+
+        microphones = np.c_[[2.5-0.1, 0.5, 0], [2.5+0.1, 0.5, 0]]
+        room.add_microphone_array(microphones)
+
+        room.simulate()
+
+        X = pra.transform.stft.analysis(room.mic_array.signals.T, nfft, nfft // 2)
+        X = X.transpose([2, 1, 0])
+
+        # Construct the new DOA object and perform localization on the frames in X
+        doa = pra.doa.algorithms['MUSIC'](microphones, fs, nfft, c=c, num_src=1)
+        doa.locate_sources(X, freq_range=freq_range)
+        pred = doa.azimuth_recon[0] 
+        if pred > np.pi:
+            pred = (2 * np.pi - pred) * 180 / np.pi
+        else:
+            pred =  pred * 180 / np.pi
+        pred = round(pred)
+
+    
+        if centre_mic == sound_source_loc:
+            found = True
+        else:
+            centre_mic
+            
+
+
+    # Vizualize
+    plt.title("Path planner")
+    ax.set_xlim([0, 5.2])
+    ax.set_ylim([0, 5.2])
 
     html = encode(fig)
     return html
