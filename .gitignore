@@ -1,4 +1,9 @@
+# Data generated for test and train
 /data/
-/training_data/azimuth_test_dataset.csv
-/training_data/azimuth_train_dataset.csv
-/models/history.npy
+
+# Dataframes generated for the CNN
+/training_data/
+
+# Models generated for the CNN
+/models/
+/history/
