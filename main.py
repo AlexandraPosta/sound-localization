@@ -20,7 +20,7 @@ base = 1.
 height = 10.
 true_col = [0, 0, 0]
 distance = 2.5 # meters
-sound_files = ".\\data\\arctic_a0015.wav"
+sound_files = ".\\data\\original\\arctic_a0015.wav"
 
 
 def add_microphone_room(mic_loc):
