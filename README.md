@@ -32,7 +32,7 @@ By using the Jupyter Notebooks, it is possible to:
 The repository is structured as follows:
 
 ```
-Project
+sound-localisation
 ├──README.md 
 |
 ├──frontend             # contains the GUI for the web interface
@@ -48,7 +48,7 @@ Project
 |
 ├──training_data        # contains .csv files used as input for the 
 |
-├──comparison           # contains .csv files that hold the spectrum resonse of models
+├──comparison           # contains .csv files that hold the spectrum response of models
 |
 └──images               # contains images used for the README file
 ```
@@ -73,16 +73,16 @@ The following python modules are required:
 - seaborn
 
 
-## Usage
-There are two different ways in which the analysis may be performed: a web-interface and Jupyter notebooks.
+### Usage
+There are two different ways in which the analysis may be performed: a web-interface and Jupyter notebooks. The web interface automates the process of generating a room and allows for a fast check of the analytic models. The Jupyter notebooks allow for an in-depth analysis of the data pipeline and model construction.
 
 In order to run the web interface:
 1. Run main.py
 2. Go on a browser and search for http://localhost:8000/
 3. Specify the 
-    - room width, length; 
+    - room width, length in meters
     - sound location 
-    - microphones location 
+    - microphone's location 
 4. Press "Apply"
 ![Alt text](./images/web_1.png?raw=true "Apply")
 5. Select an analytical model and press "Run model"
@@ -90,23 +90,25 @@ In order to run the web interface:
 6. Check the spectrum response
 7. Repeat by selecting a different model
 
-
-In order to run the notebooks and perform the full data pipeline:
-1. Use the Explore.ipynb to learn the basics
-2. Run SimulateData.ipynb to get the data for training, validation and testing. Data is saved under ./data/full_circle or ./data/half_circle
-3. In order to get the correct format for the CNN, run Dataframes.ipynb. This will generate .csv files under /training_data 
-4. In order to perform the estimation using an analytical model (MUSIC) run DoaMUSIC.ipynb
-    - in case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True
-    - in this case, uncomment " if 'test' in file]" to run the algorithm for a single file
-5. In order to perform the estimation using a learning based model (CNN) run DoaCNN.ipynb
-    - make sure that ./training_data contains 
-    - in case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True
-6. To compare the models further, run Comparion.ipynb
-    - make sure that the comparison folder contains MUSIC_data, CNN_data and CNN_spectrum
-    - if a half_circle file is tested, set the GRID to 180; if a full circle file is testing, set the GRID to 360
-7. To run the path planning algorithm, run PathPlanning.ipynb
-    - make sure that the CNN model is saved inside ./models/
-
+To run the notebooks and perform the full data pipeline:
+1.	Use the Explore.ipynb to learn the basics
+2.	Run SimulateData.ipynb
+    -	Get the data for training, validation and testing.
+    -	Data is saved under ./data/full_circle or ./data/half_circle
+3.	Run Dataframes.ipynb
+    -	This will generate .csv files under /training_data using for the CNN
+4.	Run DoaMUSIC.ipynb
+    -	Perform the estimation using an analytical model (MUSIC) 
+    -	In case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True. In this case, uncomment " if 'test' in file]" to run the algorithm for a single file
+5.	Run DoaCNN.ipynb
+    -	Perform the estimation using a learning-based model (CNN)
+    -	In case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True
+6.	Run Comparion.ipynb
+    -	Compare the MUSIC and CNN models in the same graphs
+    -	Make sure that the comparison folder contains MUSIC_data, CNN_data and CNN_spectrum
+    -	If a half_circle file is tested, set the GRID to 180; if a full circle file is testing, set the GRID to 360
+7.	Run PathPlanning.ipynb
+    -	make sure that the CNN model is saved inside ./models/
 
 
 ## Contributions
