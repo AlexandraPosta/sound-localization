@@ -1,9 +1,6 @@
 # Data generated for test and train
-/data/
+/data/full_circle/
+/data/half_circle/
 
 # Dataframes generated for the CNN
 /training_data/
-
-# Models generated for the CNN
-/models/
-/history/

@@ -3,19 +3,24 @@ Welcome to the git repository for my third-year dissertation. This repository co
 
 
 ## Summary
-The aim of this tool is to allow for a simpler comparison between analytical and machine learning models of identifying the location of a sound in an indoor environment.  
+The aim of this tool is to support a comparative study of an analytical and a learning-based model for estimating the azimuth direction of incoming sound in an indoors environment. 
 
 
 ## Features
-In order to run a simulation, you can:
+By using the web platform, it is possible to:
 - select environment
-- select type and number of microphones used
+- select number of microphones used
 - select sound source
-- select prediction model
+- select prediction model based on MUSIC or TOPS
 - analyse based on the statistics provided
 
-## Demo
-TODO
+By using the Jupyter Notebooks, it is possible to:
+- create dataset of sound from multiple incomming angles
+- observe the datapipeline
+- test the MUSIC algorithm using the dataset
+- train and test a simpler a more complex CNN arhitecture the dataset
+- analyse based on the statistics provided
+- perform a simple path planning exercise to test models further
 
 
 ## Structure
@@ -27,38 +32,43 @@ Project
 |
 ├──frontend             # contains the GUI for the web interface
 |
-├──models               # contains history from the cnn training
+├──models               # contains the cnn model
 |
-├──notebooks            # contains all Jupyter Notebooks that were developed
+├──notebooks            # contains all Jupyter Notebooks that were developed for testing
 |
 ├──data                 # stores preprocessed data as .wav files
 |   └───full_circle     # 360 degrees
 |   └───half_circle     # 180 degrees
 |
-└──training_data        # contains .csv files used for the cnn
+└──training_data        # contains .csv files used as input for the cnn
 ```
 
-## Usage
-To use this repository, you will need to have Git and a Python environment set up on your computer.
-
 ## Setup
-The following steps have to be followed to set-up the project:
-TODO 
+To use this repository, you will need to have Git and a Python environment (version > 3.6) set up on your computer.
 
-
-## Libraries
-Install the following python packages:
+### Libraries
+The following python modules are required:
+- jupyter_client
+- jupyter_core 
 - scipy
+- numpy
+- pandas
+- matplotlib
 - pyroomacoustics
 - sklearn
 - keras
+- visualkeras
 - tensorflow
+- itertools
+- seaborn
 
-## Build with
 
+## Usage
+There are two different ways in which the analysis may be performed: a web-interface and Jupyter notebooks.
 
-## License
-The development of the environment is currently based on pyroomacoustics.
+In order to run the web interface:
+1. Run main.py
+2. Go on a browser and search for
 
 
 ## Contributions
