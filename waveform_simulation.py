@@ -53,8 +53,14 @@ def main():
 
     u, alpha = init_simulation()
     pixeldata = np.zeros((dimx, dimy, 3), dtype=np.uint8 )
+    i = 0
 
     while True:
+        i += 1
+        # Uncomment the following lines to save screenshots
+        #fullpath = ".\\pygame\\ss%08d.png"%i
+        #pygame.image.save(display, fullpath)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

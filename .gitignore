@@ -4,3 +4,6 @@
 
 # Dataframes generated for the CNN
 /training_data/
+
+# Data for waveform simulation
+/pygame/
