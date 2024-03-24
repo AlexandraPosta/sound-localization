@@ -10,6 +10,20 @@ The project takes advantage of a simulated environment to normalize the training
 Data was collected from two scenarios: one with sound sources forming a 180-degree arch on one side of the microphones, and another with sound sources forming a full circle around the microphones. 
 ![Alt text](./images/room.png?raw=true "Room")
 
+Abreviations:
+- CNN: Convolutional Neural Network
+- dB: Decibels
+- DOA: Direction Of Arrival
+- DTFT: Discrete Fourier Transform
+- IID: Inter-Microphone Intensity Difference
+- MUSIC: Multiple Signal Classification
+- RIR: Room Impulse Response
+- RMSE: Root-Means-Square-Error
+- RT60: Reverberation Time
+- SNR: Signal-To-Noise Ratio
+- SSL: Sound Source Localisation
+- STFT: Short-time Fourier Transforms
+- TDOA: Time Difference Of Arrival
 
 ## Features
 By using the web platform, it is possible to:
@@ -33,22 +47,32 @@ The repository is structured as follows:
 
 ```
 sound-localisation
-├──README.md 
+├──README.md
 |
 ├──frontend             # contains the GUI for the web interface
 |
 ├──models               # contains the cnn model
 |
 ├──notebooks            # contains all Jupyter Notebooks that were used for development
+|   └───Comparison          # compare the performance of the SSL models
+|   └───Dataframes          # preprocess data for training and test
+|   └───DoaCNN              # construct the CNN model
+|   └───DoaMUSIC            # construct the MUSIC
+|   └───Explore             # used to explore the basics
+|   └───PathPlanning        # used to perform path planning using the output from the models
+|   └───Presentation        # used for the dissertation presentation
+|   └───SimulateData        # simulate the sound sources and environments
 |
 ├──data                 # stores preprocessed data as .wav files
-|   └───full_circle     # 360 degrees
-|   └───half_circle     # 180 degrees
-|   └───original        # the original audio files that were processed
+|   └───full_circle         # 360 degrees
+|   └───half_circle         # 180 degrees
+|   └───original            # the original audio files that were processed
 |
 ├──training_data        # contains .csv files used as input for the 
 |
 ├──comparison           # contains .csv files that hold the spectrum response of models
+|
+├──pygame               # contains a 2D simulator to demostrate the propagation of sound wave
 |
 └──images               # contains images used for the README file
 ```
@@ -99,7 +123,7 @@ To run the notebooks and perform the full data pipeline:
     -	This will generate .csv files under /training_data using for the CNN
 4.	Run DoaMUSIC.ipynb
     -	Perform the estimation using an analytical model (MUSIC) 
-    -	In case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True. In this case, uncomment " if 'test' in file]" to run the algorithm for a single file
+    -	In case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True. In this case, uncomment " if 'test' in file" to run the algorithm for a single file
 5.	Run DoaCNN.ipynb
     -	Perform the estimation using a learning-based model (CNN)
     -	In case further comparison is needed, make sure to set GENERATE_DATA_FOR_COMPARISON to True
